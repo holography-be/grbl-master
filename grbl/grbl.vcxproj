@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{31F0E93B-8054-4C83-9533-875FF54A0979}</ProjectGuid>
+    <RootNamespace>grbl</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Arduino-1.6\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino-1.6\hardware\arduino\avr\variants\mega;C:\Users\Jean_2\Documents\Arduino\grbl-master\grbl;C:\Program Files (x86)\Arduino-1.6\libraries;C:\Program Files (x86)\Arduino-1.6\hardware\arduino\avr\libraries;C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\Extensions\fmkpcavm.czq\Micro Platforms\default\debuggers;C:\Users\Jean_2\Documents\Arduino\libraries;C:\Users\Jean_2\Documents\Arduino\grbl-master\grbl;C:\Program Files (x86)\Arduino-1.6\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino-1.6\hardware\arduino\avr\variants\mega;C:\Program Files (x86)\Arduino-1.6\hardware\tools\avr/avr/include/;C:\Program Files (x86)\Arduino-1.6\hardware\tools\avr//avr/include/avr/;C:\Program Files (x86)\Arduino-1.6\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>C:\Users\Jean_2\Documents\Arduino\grbl-master\grbl\__vm\.grbl.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=10605;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="grbl.ino">
+      <FileType>CppCode</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="config.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="coolant_control.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="cpu_map.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="cpu_map\cpu_map_atmega2560.h" />
+    <ClInclude Include="defaults.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="eeprom.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="gcode.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="grbl.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="laser.h" />
+    <ClInclude Include="limits.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="motion_control.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="nuts_bolts.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="planner.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="print.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="probe.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="protocol.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="relais.h" />
+    <ClInclude Include="report.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="serial.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="settings.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="spindle_control.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="stepper.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="system.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="thermistor.h" />
+    <ClInclude Include="__vm\.grbl.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="coolant_control.c" />
+    <ClCompile Include="eeprom.c" />
+    <ClCompile Include="gcode.c" />
+    <ClCompile Include="laser.c" />
+    <ClCompile Include="limits.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="motion_control.c" />
+    <ClCompile Include="nuts_bolts.c" />
+    <ClCompile Include="planner.c" />
+    <ClCompile Include="print.c" />
+    <ClCompile Include="probe.c" />
+    <ClCompile Include="protocol.c" />
+    <ClCompile Include="relais.c" />
+    <ClCompile Include="report.c" />
+    <ClCompile Include="serial.c" />
+    <ClCompile Include="settings.c" />
+    <ClCompile Include="spindle_control.c" />
+    <ClCompile Include="stepper.c" />
+    <ClCompile Include="system.c" />
+    <ClCompile Include="thermistor.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
