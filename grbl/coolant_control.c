@@ -24,37 +24,22 @@
 void coolant_init()
 {
 	COOLANT_FLOOD_DDR |= (1 << COOLANT_FLOOD_BIT);
-#ifdef ENABLE_M7
-	COOLANT_MIST_DDR |= (1 << COOLANT_MIST_BIT);
-#endif
 	coolant_stop();
 }
 
 
 void coolant_stop()
 {
-  if (laserON) {
-	  // Force arrêt du laser
-	  laser_stop();
-  }
   COOLANT_FLOOD_PORT &= ~(1 << COOLANT_FLOOD_BIT);
-  coolantON = 0;
-  #ifdef ENABLE_M7
-    COOLANT_MIST_PORT &= ~(1 << COOLANT_MIST_BIT);
-  #endif
+  laserState = LASER_STATE_OFF;
 }
 
 
 void coolant_set_state(uint8_t mode)
 {
   if (mode == COOLANT_FLOOD_ENABLE) {
-	coolantON = 1;
+	laserState = LASER_STATE_ON;
     COOLANT_FLOOD_PORT |= (1 << COOLANT_FLOOD_BIT);
-
-  #ifdef ENABLE_M7  
-    } else if (mode == COOLANT_MIST_ENABLE) {
-      COOLANT_MIST_PORT |= (1 << COOLANT_MIST_BIT);
-  #endif
 
   } else {
     coolant_stop();

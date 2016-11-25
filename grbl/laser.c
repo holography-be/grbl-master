@@ -4,10 +4,6 @@
   
 #include "grbl.h"
 
-#define Laser_Temp_PIN		A0 // ANALOG
-#define LaserPower_PIN		9  // PWM
-#define LaserPWM			OCR2B
-
 //#define LASERLEVEL_DDR	DDRL
 //#define LASERLEVEL_PIN	PINL
 //#define LASERLEVEL_PORT	PORTL
@@ -26,12 +22,6 @@ const uint8_t _delai = Laser_Delai_Sequence;
 volatile uint8_t waiting;
 
 uint8_t laser_init() {
-	// init Timer
-	cli();
-	TIMSK5 = 0;
-	TCCR5A = 0;
-	TCCR5B = bit(WGM52) | bit(CS50) | bit(CS52);  // 1024 prescaler
-	sei();
 	BLINK_DDR |= (1 << BLINK_BIT);
 	BLINK_PORT &= ~(1 << BLINK_BIT);
 	laser_currentPower = 0;
@@ -39,14 +29,13 @@ uint8_t laser_init() {
 
 uint8_t laser_start() {
 	// Coolant must be on
-	coolant_run(COOLANT_FLOOD_ENABLE);
 	BLINK_PORT |= (1 << BLINK_BIT);
 	uint8_t idx;
 	for (idx = 0; idx < 3; idx++) {		
 		RELAIS_PORT |= (1 << _startSequence[idx]);
-		wait(1);
+		delay_ms(Laser_Delai_Sequence);
 	}
-	laserON = 1;
+	laserState = LASER_STATE_OFF;
 	return 1;
 }
 
@@ -58,9 +47,9 @@ uint8_t laser_stop() {
 	uint8_t idx;
 	for (idx = 0; idx < 3; idx++) {
 		RELAIS_PORT = ~(1 << _stopSequence[idx]);
-		wait(1);
+		delay_ms(Laser_Delai_Sequence);
 	}
-	laserON = 0;
+	laserState = LASER_STATE_ON;
 	return 1;
 }
 
@@ -72,7 +61,7 @@ uint8_t laser_shutdown() {
 	for (idx = 0; idx < 2; idx++) {
 		RELAIS_PORT &= ~(1 << _stopSequence[idx]);
 	}
-	laserON = 0;
+	laserState = LASER_STATE_ON;
 	return 1;
 }
 
@@ -82,7 +71,7 @@ uint8_t laser_getPower() {
 }
 
 float laser_getTemp() {
-	uint8_t temp = thermistor_read(0);
+	uint8_t temp = thermistor_read(Laser_Temp_PIN);
 	// resistance at 25 degrees C
 #define THERMISTORNOMINAL 10000  // 10K     
 	// temp. for nominal resistance (almost always 25 C)
@@ -103,7 +92,7 @@ float laser_getTemp() {
 	average = 0;
 	for (i = 0; i< NUMSAMPLES; i++) {
 		average += thermistor_read(0);
-		//delay(10);
+		_delay_ms(10);
 	}
 	average /= NUMSAMPLES;
 	average = 1023 / average - 1;
@@ -117,17 +106,3 @@ float laser_getTemp() {
 	return steinhart;
 }
 
-void wait(unsigned long sec) {
-	if (sec > 4) sec = 4;
-	TCNT5 = 0;
-	OCR5A = 15625 * sec;
-	waiting = 1;
-	TIMSK5 = bit(OCIE5A);
-	while (waiting == 1) {}
-	TIMSK5 = 0;
-}
-
-ISR(TIMER5_COMPA_vect)
-{
-	waiting = 0;
-}

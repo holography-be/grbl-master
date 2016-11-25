@@ -196,12 +196,12 @@ void protocol_execute_realtime()
    
   // check laser temp
   // cette fonction est appelée très souvent.
-  laserTemp = laser_getTemp();
-  if (laserTemp > LaserMaxTemp) {
-    // laser shutdown
-   laser_shutdown();
-   bit_true_atomic(sys_rt_exec_alarm, (EXEC_ALARM_LASER_TEMP | EXEC_CRITICAL_EVENT));
-  }
+  //laserTemp = laser_getTemp();
+  //if (laserTemp > LaserMaxTemp) {
+  //  // laser shutdown
+  // laser_shutdown();
+  // bit_true_atomic(sys_rt_exec_alarm, (EXEC_ALARM_LASER_TEMP | EXEC_CRITICAL_EVENT));
+  //}
   // Check and execute alarms. 
   rt_exec = sys_rt_exec_alarm; // Copy volatile sys_rt_exec_alarm.
   if (rt_exec) { // Enter only if any bit flag is true
@@ -219,18 +219,18 @@ void protocol_execute_realtime()
 		report_alarm_message(ALARM_PROBE_FAIL);
     } else if (rt_exec & EXEC_ALARM_HOMING_FAIL) {
 		report_alarm_message(ALARM_HOMING_FAIL);
-	} else if (rt_exec & EXEC_ALARM_COOLANT_OFF) {
-		// Emergency stop laser
-		laser_shutdown();
-		report_alarm_message(ALARM_COOLANT_OFF);
-	} else if (rt_exec & EXEC_ALARM_LASER_TEMP) {
-		// Emergency stop laser
-		laser_shutdown();
-		report_alarm_message(ALARM_LASER_TEMP);
+	//} else if (rt_exec & EXEC_ALARM_COOLANT_OFF) {
+	//	// Emergency stop laser
+	//	laser_shutdown();
+	//	report_alarm_message(ALARM_COOLANT_OFF);
+	//} else if (rt_exec & EXEC_ALARM_LASER_TEMP) {
+	//	// Emergency stop laser
+	//	laser_shutdown();
+	//	report_alarm_message(ALARM_LASER_TEMP);
 	}
     // Halt everything upon a critical event flag. Currently hard and soft limits flag this.
     if (rt_exec & EXEC_CRITICAL_EVENT) {
-	  laser_shutdown();
+	  //laser_shutdown();
       report_feedback_message(MESSAGE_CRITICAL_EVENT);
       bit_false_atomic(sys_rt_exec_state,EXEC_RESET); // Disable any existing reset
       do { 
@@ -306,7 +306,7 @@ void protocol_execute_realtime()
         // executed here, if IDLE, or when the CYCLE completes via the EXEC_CYCLE_STOP flag.
         if (rt_exec & EXEC_SAFETY_DOOR) {
 		  // Shutwon laser
-		  laser_shutdown();
+		  //laser_shutdown();
           report_feedback_message(MESSAGE_SAFETY_DOOR_AJAR); 
           // If already in active, ready-to-resume HOLD, set CYCLE_STOP flag to force de-energize.
           // NOTE: Only temporarily sets the 'rt_exec' variable, not the volatile 'rt_exec_state' variable.

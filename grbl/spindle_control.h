@@ -22,14 +22,13 @@
 #ifndef spindle_control_h
 #define spindle_control_h 
 
+#define Timer4Counter	7	// (255 * 7) -> pour frequence de 8957 Hz
 
 // Initializes spindle pins and hardware PWM, if enabled.
 void spindle_init();
 
-void spindle_reinit();
-
 // Sets spindle direction and spindle rpm via PWM, if enabled.
-void spindle_run(uint8_t direction, float laserPower);
+void spindle_run(uint8_t state, float laserPower);
 
 void spindle_set_state(uint8_t state, float laserPower);
 

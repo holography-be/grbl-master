@@ -313,22 +313,22 @@ uint8_t gc_execute_line(char *line)
               case 9: gc_block.modal.coolant = COOLANT_DISABLE; break;
             }
             break;
-		  case 10:
-			  // stop laser
-			  // immediate execution
-			  laser_stop();
-			  gc_block.modal.laser = LASER_DISABLE;
-			  break;
-		  case 11:
-			  // start laser
-			  // immediate execution
-			  laser_start();
-			  gc_block.modal.laser = LASER_ENABLE; break;
-		  case 12:
-			  // Laser emergency stop
-			  // immediate execution
-			  laser_shutdown();
-			  gc_block.modal.laser = LASER_SHUTDOWN;  break;
+		  //case 10:
+			 // // stop laser
+			 // // immediate execution
+			 // laser_stop();
+			 // gc_block.modal.laser = LASER_DISABLE;
+			 // break;
+		  //case 11:
+			 // // start laser
+			 // // immediate execution
+			 // laser_start();
+			 // gc_block.modal.laser = LASER_ENABLE; break;
+		  //case 12:
+			 // // Laser emergency stop
+			 // // immediate execution
+			 // laser_shutdown();
+			 // gc_block.modal.laser = LASER_SHUTDOWN;  break;
 		  case 100:
 			  // disable stepper motors
 			  break;

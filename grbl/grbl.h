@@ -42,8 +42,7 @@
 // Define the Grbl system include files. NOTE: Do not alter organization.
 
 uint8_t laserPowerSettings;	// % of power (need to change OCR4A for spindle control)	: JDU - 20161113
-uint8_t coolantON;
-uint8_t laserON;
+uint8_t laserState;
 
 #include "config.h"
 #include "nuts_bolts.h"

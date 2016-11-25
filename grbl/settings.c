@@ -271,7 +271,6 @@ uint8_t settings_store_global_setting(uint8_t parameter, float value, uint8_t sa
 	  case 28:
 		  if ((int_value < 0) || (int_value > 100)) { return(STATUS_LASER_INVALID_VALUE); }
 		  laserPowerSettings = int_value;	// laser Power divisor : JDU - 20161113
-		  spindel_reinit();
 		  break;
       default: 
         return(STATUS_INVALID_STATEMENT);

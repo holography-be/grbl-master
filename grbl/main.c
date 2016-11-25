@@ -66,7 +66,7 @@ int main(void)
 	thermistor_init();
     spindle_init();
     coolant_init();
-	laser_init();
+	//laser_init();
     limits_init(); 
     probe_init();
     plan_reset(); // Clear block buffer and planner variables

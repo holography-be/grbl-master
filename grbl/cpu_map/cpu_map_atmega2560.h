@@ -84,6 +84,7 @@
 #define SPINDLE_ENABLE_DDR      DDRH
 #define SPINDLE_ENABLE_PORT     PORTH
 #define SPINDLE_ENABLE_BIT      3 // MEGA2560 Digital Pin 6
+#define	INVERT_SPINDLE_ENABLE_PIN 1 // inverse sortie commande laser (0 = relais on, 1 = relais off)
 #define SPINDLE_DIRECTION_DDR   DDRE
 #define SPINDLE_DIRECTION_PORT  PORTE
 #define SPINDLE_DIRECTION_BIT   3 // MEGA2560 Digital Pin 5
@@ -164,7 +165,7 @@
 #define Laser_Driver_PIN	RELAIS1_BIT
 #define Laser_Peltier_PIN	RELAIS2_BIT
 #define Laser_Diode_PIN		RELAIS3_BIT
-#define Laser_Temp_PIN		A0 // ANALOG
+#define Laser_Temp_PIN		ADC0D   // ANALOG 0
 #define LaserPower_PIN		9  // PWM
 #define LaserPWM			OCR2B
 #define LaserMaxTemp		25.0
