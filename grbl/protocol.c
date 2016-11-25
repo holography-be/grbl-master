@@ -25,7 +25,7 @@
 #define COMMENT_NONE 0
 #define COMMENT_TYPE_PARENTHESES 1
 #define COMMENT_TYPE_SEMICOLON 2
-
+#define KEEP_ALIVE	5000	// 5000 ms
 
 static char line[LINE_BUFFER_SIZE]; // Line to be executed. Zero-terminated.
 
@@ -97,6 +97,7 @@ void protocol_main_loop()
   uint8_t comment = COMMENT_NONE;
   uint8_t char_counter = 0;
   uint8_t c;
+  uint32_t keepAlive = getTick();
   for (;;) {
 
     // Process one line of incoming serial data, as the data becomes available. Performs an
@@ -108,8 +109,16 @@ void protocol_main_loop()
     // exceed 256 characters, but the Arduino Uno does not have the memory space for this.
     // With a better processor, it would be very easy to pull this initial parsing out as a 
     // seperate task to be shared by the g-code parser and Grbl's system commands.
-    
+
+	  if (keepAlive + KEEP_ALIVE < getTick()) {
+		  // connexion perdue (5000 millisecondes sans requete)
+		  // on coupe le laser et le moteurs et on ne fait plus rien
+		  spindle_set_state(SPINDLE_DISABLE,0);
+		  st_force_disable_stepper();
+		  for (;;) {}	// en attente d'un reset
+	  }
     while((c = serial_read()) != SERIAL_NO_DATA) {
+	  keepAlive = getTick();
       if ((c == '\n') || (c == '\r')) { // End of line reached
         line[char_counter] = 0; // Set string termination character.
         protocol_execute_line(line); // Line is complete. Execute it!
