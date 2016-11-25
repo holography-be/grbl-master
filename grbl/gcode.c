@@ -1084,7 +1084,7 @@ uint8_t gc_execute_line(char *line)
 		if (!(settings_read_coord_data(gc_state.modal.coord_select,coordinate_data))) { FAIL(STATUS_SETTING_READ_FAIL); } 
 		memcpy(gc_state.coord_system,coordinate_data,sizeof(coordinate_data));
 		spindle_stop();
-		// coolant_stop();		// don't stop coolant
+		coolant_stop();
 	  }
 	  
 	  report_feedback_message(MESSAGE_PROGRAM_END);

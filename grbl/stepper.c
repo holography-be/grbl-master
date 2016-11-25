@@ -289,7 +289,8 @@ void st_force_disable_stepper() {
 // with probing and homing cycles that require true real-time positions.
 ISR(TIMER1_COMPA_vect)
 {        
-// SPINDLE_ENABLE_PORT ^= 1<<SPINDLE_ENABLE_BIT; // Debug: Used to time ISR
+  //COOLANT_FLOOD_PORT ^= 1<<COOLANT_FLOOD_BIT;
+  //SPINDLE_ENABLE_PORT ^= 1<<SPINDLE_ENABLE_BIT; // Debug: Used to time ISR
   if (busy) { return; } // The busy-flag is used to avoid reentering this interrupt
   
   // Set the direction pins a couple of nanoseconds before we step the steppers
@@ -407,6 +408,7 @@ ISR(TIMER1_COMPA_vect)
   st.step_outbits ^= step_port_invert_mask;  // Apply step port invert mask    
   busy = false;
 // SPINDLE_ENABLE_PORT ^= 1<<SPINDLE_ENABLE_BIT; // Debug: Used to time ISR
+// COOLANT_FLOOD_PORT ^= 1<<COOLANT_FLOOD_BIT;
 }
 
 

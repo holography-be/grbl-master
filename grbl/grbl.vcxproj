@@ -72,6 +72,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="clock.h" />
     <ClInclude Include="config.h">
       <FileType>CppCode</FileType>
     </ClInclude>
@@ -139,6 +140,7 @@
     <ClInclude Include="__vm\.grbl.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="clock.c" />
     <ClCompile Include="coolant_control.c" />
     <ClCompile Include="eeprom.c" />
     <ClCompile Include="gcode.c" />

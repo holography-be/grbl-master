@@ -66,6 +66,7 @@ uint8_t laserState;
 #include "laser.h"
 #include "thermistor.h"
 #include "relais.h"
+#include "clock.h"
 
 
 

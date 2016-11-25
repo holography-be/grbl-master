@@ -84,6 +84,8 @@ extern "C" void __cxa_pure_virtual() {;}
 #define portInputRegister(P)
 #define portModeRegister(P)
 #include <..\grbl\grbl.ino>
+#include <..\grbl\clock.c>
+#include <..\grbl\clock.h>
 #include <..\grbl\config.h>
 #include <..\grbl\coolant_control.c>
 #include <..\grbl\coolant_control.h>

@@ -228,9 +228,10 @@ void protocol_execute_realtime()
 	//	laser_shutdown();
 	//	report_alarm_message(ALARM_LASER_TEMP);
 	}
+	// stop laser for all alarm
+	spindle_stop();
     // Halt everything upon a critical event flag. Currently hard and soft limits flag this.
     if (rt_exec & EXEC_CRITICAL_EVENT) {
-	  //laser_shutdown();
       report_feedback_message(MESSAGE_CRITICAL_EVENT);
       bit_false_atomic(sys_rt_exec_state,EXEC_RESET); // Disable any existing reset
       do { 
@@ -306,7 +307,7 @@ void protocol_execute_realtime()
         // executed here, if IDLE, or when the CYCLE completes via the EXEC_CYCLE_STOP flag.
         if (rt_exec & EXEC_SAFETY_DOOR) {
 		  // Shutwon laser
-		  //laser_shutdown();
+		  spindle_stop();	// déjà fait mais autant être certain !
           report_feedback_message(MESSAGE_SAFETY_DOOR_AJAR); 
           // If already in active, ready-to-resume HOLD, set CYCLE_STOP flag to force de-energize.
           // NOTE: Only temporarily sets the 'rt_exec' variable, not the volatile 'rt_exec_state' variable.
@@ -332,7 +333,7 @@ void protocol_execute_realtime()
             // Delayed Tasks: Restart spindle and coolant, delay to power-up, then resume cycle.
             if (gc_state.modal.spindle != SPINDLE_DISABLE) { 
               spindle_set_state(gc_state.modal.spindle, gc_state.spindle_speed); 
-              delay_ms(SAFETY_DOOR_SPINDLE_DELAY); // TODO: Blocking function call. Need a non-blocking one eventually.
+              //delay_ms(SAFETY_DOOR_SPINDLE_DELAY); // TODO: Blocking function call. Need a non-blocking one eventually.
             }
             if (gc_state.modal.coolant != COOLANT_DISABLE) { 
               coolant_set_state(gc_state.modal.coolant); 

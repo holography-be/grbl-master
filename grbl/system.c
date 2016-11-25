@@ -62,7 +62,7 @@ ISR(CONTROL_INT_vect)
 }
 
 
-// Returns if safety door is ajar(T) or closed(F), based on pin state.
+// Returns if safety door is open(T) or closed(F), based on pin state.
 uint8_t system_check_safety_door_ajar()
 {
   #ifdef ENABLE_SAFETY_DOOR_INPUT_PIN

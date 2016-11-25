@@ -53,17 +53,17 @@ uint8_t laser_stop() {
 	return 1;
 }
 
-uint8_t laser_shutdown() {
-	coolant_run(COOLANT_FLOOD_ENABLE);
-	BLINK_PORT &= ~(1 << BLINK_BIT);
-	LaserPWM = 0;
-	uint8_t idx;
-	for (idx = 0; idx < 2; idx++) {
-		RELAIS_PORT &= ~(1 << _stopSequence[idx]);
-	}
-	laserState = LASER_STATE_ON;
-	return 1;
-}
+//uint8_t laser_shutdown() {
+//	coolant_run(COOLANT_FLOOD_ENABLE);
+//	BLINK_PORT &= ~(1 << BLINK_BIT);
+//	LaserPWM = 0;
+//	uint8_t idx;
+//	for (idx = 0; idx < 2; idx++) {
+//		RELAIS_PORT &= ~(1 << _stopSequence[idx]);
+//	}
+//	laserState = LASER_STATE_ON;
+//	return 1;
+//}
 
 
 uint8_t laser_getPower() {
