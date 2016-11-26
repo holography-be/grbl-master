@@ -38,7 +38,7 @@ uint32_t getTick()
 }
 
 ISR(TIMER5_COMPA_vect) {
-	PINH = (1 << 3);	// toogle D6
+	//PINH = (1 << 3);	// toogle D6
 	TCNT5 = 0;
 	__ticks++;
 }

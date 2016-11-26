@@ -59,6 +59,7 @@
 
 #define BLINK_DDR   DDRB
 #define BLINK_PORT  PORTB
+#define BLINK_PIN	PINB
 #define BLINK_BIT   7 // MEGA2560 Digital Pin 13
 
 // Define stepper driver enable/disable output pin.
@@ -84,7 +85,7 @@
 #define SPINDLE_ENABLE_DDR      DDRH
 #define SPINDLE_ENABLE_PORT     PORTH
 #define SPINDLE_ENABLE_BIT      3 // MEGA2560 Digital Pin 6
-#define	INVERT_SPINDLE_ENABLE_PIN 1 // inverse sortie commande laser (0 = relais on, 1 = relais off)
+//#define	INVERT_SPINDLE_ENABLE_PIN 1 // inverse sortie commande laser (0 = relais on, 1 = relais off)
 #define SPINDLE_DIRECTION_DDR   DDRE
 #define SPINDLE_DIRECTION_PORT  PORTE
 #define SPINDLE_DIRECTION_BIT   3 // MEGA2560 Digital Pin 5
@@ -131,7 +132,7 @@
   #define PWM_MAX_VALUE      255
   #define TCCRA_REGISTER		TCCR4A
   #define TCCRB_REGISTER		TCCR4B
-  #define OCR_REGISTER		OCR4B
+  #define OCR_REGISTER		OCR4B	// digital port 7
   
   #define COMB_BIT			COM4B1
   #define WAVE0_REGISTER		WGM40
@@ -144,38 +145,39 @@
   #define SPINDLE_PWM_BIT		4 // MEGA2560 Digital Pin 7
 #endif // End of VARIABLE_SPINDLE
 
-
-// Laser Control
-#define RELAIS_DDR			DDRL // D42 -> D49
-#define RELAIS_PIN			PINL
-#define RELAIS_PORT			PORTL
-#define RELAIS_ENABLE_BIT	0	// D49
-#define RELAIS1_BIT			1	// D48
-#define RELAIS2_BIT			2	// D47
-#define RELAIS3_BIT			3	// D46
-#define RELAIS4_BIT			4	// D45
-#define RELAIS5_BIT			5	// D44
-#define RELAIS6_BIT			6   // D43
-#define RELAIS7_BIT			7	// D42
-#define RELAIS_MASK			(B11111111) // Bit set = OUTPUT
-#define FAN1_BIT			RELAIS5_BIT
-#define FAN2_BIT			RELAIS6_BIT
-#define FAN3_BIT			RELAIS7_BIT
-
-#define Laser_Driver_PIN	RELAIS1_BIT
-#define Laser_Peltier_PIN	RELAIS2_BIT
-#define Laser_Diode_PIN		RELAIS3_BIT
 #define Laser_Temp_PIN		ADC0D   // ANALOG 0
-#define LaserPower_PIN		9  // PWM
-#define LaserPWM			OCR2B
-#define LaserMaxTemp		25.0
+
+// Leds Control
+//#define RELAIS_DDR			DDRL // D42 -> D49
+//#define RELAIS_PIN			PINL
+//#define RELAIS_PORT			PORTL
+//#define RELAIS_ENABLE_BIT	0	// D49
+//#define RELAIS1_BIT			1	// D48
+//#define RELAIS2_BIT			2	// D47
+//#define RELAIS3_BIT			3	// D46
+//#define RELAIS4_BIT			4	// D45
+//#define RELAIS5_BIT			5	// D44
+//#define RELAIS6_BIT			6   // D43
+//#define RELAIS7_BIT			7	// D42
+//#define RELAIS_MASK			(B11111111) // Bit set = OUTPUT
+//#define FAN1_BIT			RELAIS5_BIT
+//#define FAN2_BIT			RELAIS6_BIT
+//#define FAN3_BIT			RELAIS7_BIT
+//
+//#define Laser_Driver_PIN	RELAIS1_BIT
+//#define Laser_Peltier_PIN	RELAIS2_BIT
+//#define Laser_Diode_PIN		RELAIS3_BIT
+
+//#define LaserPower_PIN		9  // PWM
+//#define LaserPWM			OCR2B
+//#define LaserMaxTemp		25.0
 
 //#define LASERLEVEL_DDR	DDRL
 //#define LASERLEVEL_PIN	PINL
 //#define LASERLEVEL_PORT	PORTL
 //#define LASERLEVEL_REQUEST	50	// Send signal to Nano that we wish send datas
 //#define LASERLEVEL_STATUS	51	// Signal send by Nano (HIGH = Ready, LOW = Busy)
-#define Laser_Start_Sequence	 Laser_Peltier_PIN,Laser_Driver_PIN,Laser_Diode_PIN
-#define Laser_Stop_Sequence		 Laser_Diode_PIN,Laser_Driver_PIN,Laser_Peltier_PIN
-#define Laser_Emergency_Sequence Laser_Diode_PIN,Laser_Driver_PIN // On laisse le Peltier 
-#define Laser_Delai_Sequence	 1500
+//#define Laser_Start_Sequence	 Laser_Peltier_PIN,Laser_Driver_PIN,Laser_Diode_PIN
+//#define Laser_Stop_Sequence		 Laser_Diode_PIN,Laser_Driver_PIN,Laser_Peltier_PIN
+//#define Laser_Emergency_Sequence Laser_Diode_PIN,Laser_Driver_PIN // On laisse le Peltier 
+//#define Laser_Delai_Sequence	 1500

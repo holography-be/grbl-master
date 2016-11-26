@@ -172,7 +172,7 @@ void report_grbl_help() {
                         "$X (kill alarm lock)\r\n"
                         "$H (run homing cycle)\r\n"
 						"$RST=x (restore x=$: default values, x=#: parameters, x=*: all)\r\n"
-						"$S (force disable stepper)\r\n"
+						"$S (disable stepper)\r\n"
                         "~ (cycle start)\r\n"
                         "! (feed hold)\r\n"
                         "? (current status)\r\n"
@@ -497,10 +497,10 @@ void report_realtime_status()
   }
 
   // Report laser power
-  if (bit_istrue(settings.status_report_mask,BITFLAG_RT_STATUS_LASER_TEMP)) {
-	  printPgmString(PSTR(",Laser Power:"));
-	  print_uint8_base10(laser_getPower());
-  }
+  //if (bit_istrue(settings.status_report_mask,BITFLAG_RT_STATUS_LASER_TEMP)) {
+	 // printPgmString(PSTR(",Laser Power:"));
+	 // print_uint8_base10(laser_getPower());
+  //}
     
   #ifdef USE_LINE_NUMBERS
     // Report current line number

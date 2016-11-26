@@ -96,6 +96,7 @@
       <FileType>CppCode</FileType>
     </ClInclude>
     <ClInclude Include="laser.h" />
+    <ClInclude Include="leds.h" />
     <ClInclude Include="limits.h">
       <FileType>CppCode</FileType>
     </ClInclude>
@@ -145,6 +146,7 @@
     <ClCompile Include="eeprom.c" />
     <ClCompile Include="gcode.c" />
     <ClCompile Include="laser.c" />
+    <ClCompile Include="leds.c" />
     <ClCompile Include="limits.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="motion_control.c" />

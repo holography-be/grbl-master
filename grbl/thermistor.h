@@ -9,5 +9,6 @@ thermistor.h
 
 uint8_t thermistor_init();
 int thermistor_read(uint8_t port);
+float laser_getTemp();
 
 #endif

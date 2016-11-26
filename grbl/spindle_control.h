@@ -32,6 +32,8 @@ void spindle_run(uint8_t state, float laserPower);
 
 void spindle_set_state(uint8_t state, float laserPower);
 
+uint8_t spindle_get_state();
+
 // Kills spindle.
 void spindle_stop();
 

@@ -21,6 +21,7 @@
 
 #include "grbl.h"
 
+uint8_t _spindle_state = SPINDLE_DISABLE;
 
 void spindle_init()
 {    
@@ -50,6 +51,7 @@ void spindle_init()
 void spindle_stop()
 {
 	// On the Uno, spindle enable and PWM are shared. Other CPUs have seperate enable pin.
+	_spindle_state = SPINDLE_DISABLE;
 #ifdef VARIABLE_SPINDLE
 	TCCRA_REGISTER &= ~(1 << COMB_BIT); // Disable PWM. Output voltage is zero.
 	OCR_REGISTER = 0;
@@ -65,6 +67,9 @@ void spindle_stop()
 #endif  
 }
 
+uint8_t spindle_get_state() {
+	return _spindle_state;
+}
 
 void spindle_set_state(uint8_t state, float laserPower)
 {
@@ -94,6 +99,7 @@ void spindle_set_state(uint8_t state, float laserPower)
 		SPINDLE_ENABLE_PORT &= ~(1 << SPINDLE_ENABLE_BIT);
 #else
 		SPINDLE_ENABLE_PORT |= (1 << SPINDLE_ENABLE_BIT);
+		_spindle_state = SPINDLE_ENABLE_CW;
 #endif
 		}
 #else

@@ -99,6 +99,8 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <..\grbl\grbl.h>
 #include <..\grbl\laser.c>
 #include <..\grbl\laser.h>
+#include <..\grbl\leds.c>
+#include <..\grbl\leds.h>
 #include <..\grbl\limits.c>
 #include <..\grbl\limits.h>
 #include <..\grbl\main.c>

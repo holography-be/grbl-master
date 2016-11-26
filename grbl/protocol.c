@@ -25,7 +25,7 @@
 #define COMMENT_NONE 0
 #define COMMENT_TYPE_PARENTHESES 1
 #define COMMENT_TYPE_SEMICOLON 2
-#define KEEP_ALIVE	5000	// 5000 ms
+//#define KEEP_ALIVE	5000	// 5000 ms
 
 static char line[LINE_BUFFER_SIZE]; // Line to be executed. Zero-terminated.
 
@@ -110,13 +110,22 @@ void protocol_main_loop()
     // With a better processor, it would be very easy to pull this initial parsing out as a 
     // seperate task to be shared by the g-code parser and Grbl's system commands.
 
+#ifdef KEEP_ALIVE
 	  if (keepAlive + KEEP_ALIVE < getTick()) {
 		  // connexion perdue (5000 millisecondes sans requete)
 		  // on coupe le laser et le moteurs et on ne fait plus rien
-		  spindle_set_state(SPINDLE_DISABLE,0);
+		  if (spindle_get_state() != SPINDLE_DISABLE) {
+			spindle_set_state(SPINDLE_DISABLE,0);
+		  }
 		  st_force_disable_stepper();
-		  for (;;) {}	// en attente d'un reset
+		  for (;;) {
+			  delay_ms(500);
+			  BLINK_PIN = (1 << BLINK_BIT);
+		  }	// en attente d'un reset
 	  }
+#endif // KEEP_ALIVE
+
+
     while((c = serial_read()) != SERIAL_NO_DATA) {
 	  keepAlive = getTick();
       if ((c == '\n') || (c == '\r')) { // End of line reached
