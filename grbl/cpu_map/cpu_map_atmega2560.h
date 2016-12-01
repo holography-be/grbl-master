@@ -148,18 +148,23 @@
 #define Laser_Temp_PIN		ADC0D   // ANALOG 0
 
 // Leds Control
-//#define RELAIS_DDR			DDRL // D42 -> D49
-//#define RELAIS_PIN			PINL
-//#define RELAIS_PORT			PORTL
-//#define RELAIS_ENABLE_BIT	0	// D49
-//#define RELAIS1_BIT			1	// D48
-//#define RELAIS2_BIT			2	// D47
-//#define RELAIS3_BIT			3	// D46
-//#define RELAIS4_BIT			4	// D45
-//#define RELAIS5_BIT			5	// D44
-//#define RELAIS6_BIT			6   // D43
-//#define RELAIS7_BIT			7	// D42
-//#define RELAIS_MASK			(B11111111) // Bit set = OUTPUT
+#define LED_DDR			DDRL // D42 -> D49
+#define LED_PIN			PINL
+#define LED_PORT			PORTL
+#define LED1_BIT			0	// D49
+#define LED2_BIT			1	// D48
+#define LED3_BIT			2	// D47
+#define LED4_BIT			3	// D46
+#define LED5_BIT			4	// D45
+#define LED6_BIT			5	// D44
+#define LED7_BIT			6   // D43
+#define LED8_BIT			7	// D42
+#define LED_MASK			(B11111111) // Bit set = OUTPUT
+
+#define LED_ALARM				LED1_BIT
+#define LED_CONNECTION_ALARM	LED2_BIT
+#define LED_LASER				LED3_BIT
+
 //#define FAN1_BIT			RELAIS5_BIT
 //#define FAN2_BIT			RELAIS6_BIT
 //#define FAN3_BIT			RELAIS7_BIT
