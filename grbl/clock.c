@@ -7,8 +7,8 @@
 
 volatile uint32_t __ticks;
 volatile uint8_t __blink;
-uint8_t __blinkDelay = 5;
-uint8_t ledPort = 0;
+volatile uint8_t __blinkDelay = 5;
+volatile uint8_t __ledBlinking = 0;
 
 void clock_init()
 {
@@ -25,10 +25,7 @@ void clock_init()
 	sei();
 }
 
-void setBlinkDelay(uint8_t blinkDelay) {
-	__blinkDelay = blinkDelay;  // in 1/10th of second
-	__blink = 0;	// reset blinking
-}
+
 
 void clock_start()
 {
@@ -47,10 +44,23 @@ uint32_t getTick()
 	return __ticks * 100;
 }
 
+void setBlinkDelay(uint8_t blinkDelay) {
+	__blinkDelay = blinkDelay;  // in 1/10th of second
+	__blink = 0;	// reset blinking
+}
+
+void startBlink(uint8_t led) {
+	__ledBlinking |= (1 << led);
+}
+
+void stopBlink(uint8_t led) {
+	__ledBlinking &= ~(1 << led);
+}
+
 ISR(TIMER5_COMPA_vect) {
 	__ticks++;
 	if (__blink++ == 5) {
-		LED_PIN = (1 << 4);	// toogle led 5
+		LED_PIN = __ledBlinking;	// toogle leds
 		__blink = 0;
 	}
 }

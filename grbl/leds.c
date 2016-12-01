@@ -18,7 +18,6 @@ void led_off(uint8_t led)
 
 void led_toggle(uint8_t led)
 {
-	// check si il faut tenir compte des autre bits
 	LED_PIN = (1 << led);
 }
 
