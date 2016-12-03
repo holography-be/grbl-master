@@ -18,7 +18,7 @@ void led_off(uint8_t led)
 
 void led_toggle(uint8_t led)
 {
-	LED_PIN = (1 << led);
+	LED_PIN |= (1 << led);
 }
 
 void all_led_on()
