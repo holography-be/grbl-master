@@ -25,7 +25,7 @@
 #define COMMENT_NONE 0
 #define COMMENT_TYPE_PARENTHESES 1
 #define COMMENT_TYPE_SEMICOLON 2
-//#define KEEP_ALIVE	5000	// 5000 ms
+//#define KEEP_ALIVE	1000	// 5000 ms
 
 static char line[LINE_BUFFER_SIZE]; // Line to be executed. Zero-terminated.
 
@@ -111,17 +111,24 @@ void protocol_main_loop()
     // seperate task to be shared by the g-code parser and Grbl's system commands.
 
 #ifdef KEEP_ALIVE
+
+	  
+
 	  if (keepAlive + KEEP_ALIVE < getTick()) {
+		  keepAlive = 0;
+		  lcdReport_Position();
 		  // connexion perdue (5000 millisecondes sans requete)
 		  // on coupe le laser et le moteurs et on ne fait plus rien
-		  if (spindle_get_state() != SPINDLE_DISABLE) {
-			spindle_set_state(SPINDLE_DISABLE,0);
-		  }
-		  st_force_disable_stepper();
-		  for (;;) {
-			  delay_ms(500);
-			  BLINK_PIN = (1 << BLINK_BIT);
-		  }	// en attente d'un reset
+		 // if (spindle_get_state() != SPINDLE_DISABLE) {
+			//spindle_set_state(SPINDLE_DISABLE,0);
+		 // }
+		 // st_force_disable_stepper();
+		 // lcdReport_NoConnect();
+		 // led_blink(LED1);
+		 // for (;;) {
+			//  //delay_ms(500);
+			//  //BLINK_PIN = (1 << BLINK_BIT);
+		 // }	// en attente d'un reset
 	  }
 #endif // KEEP_ALIVE
 
@@ -131,6 +138,7 @@ void protocol_main_loop()
       if ((c == '\n') || (c == '\r')) { // End of line reached
         line[char_counter] = 0; // Set string termination character.
         protocol_execute_line(line); // Line is complete. Execute it!
+		//lcdReport_Position();
         comment = COMMENT_NONE;
         char_counter = 0;
       } else {

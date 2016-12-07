@@ -61,9 +61,12 @@ int main(void)
     // a system abort and ensuring any active interrupts are cleanly reset.
   
     // Reset Grbl primary systems.
+	//lcd_init(0x27, 20, 4);
+	//lcd_clear();
+	//lcd_backlight();
+	//lcdReport_Welcome();
     serial_reset_read_buffer(); // Clear serial read buffer
     gc_init(); // Set g-code parser to default state
-	clock_init();
 	thermistor_init();
     spindle_init();
     coolant_init();
@@ -72,7 +75,12 @@ int main(void)
     probe_init();
     plan_reset(); // Clear block buffer and planner variables
     st_reset(); // Clear stepper subsystem variables.
+	clock_init();	// init clock (pour keepALine et clignotement leds)
+	clock_start();	// démarre compteur (Timer5)
+	leds_init();	// Eteint toutes les leds
 
+
+	
     // Sync cleared gcode and planner positions to current system position.
     plan_sync_position();
     gc_sync_position();
@@ -83,10 +91,17 @@ int main(void)
     sys_rt_exec_alarm = 0;
     sys.suspend = false;
     sys.soft_limit = false;
-              
+
+	//lcdReport_Ready();
+	//led_blink(LED1);
     // Start Grbl main loop. Processes program inputs and executes them.
     protocol_main_loop();
     
   }
   return 0;   /* Never reached */
+}
+
+void I2C_init() {
+	I2C_DDR &= B11111100;
+	I2C_PORT |= B11111111;
 }

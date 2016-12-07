@@ -35,3 +35,11 @@ void all_led_toggle()
 {
 	LED_PIN = 0xFF;
 }
+
+void led_blink(uint8_t led) {
+	startBlink(led);
+}
+
+void led_blinkOff(uint8_t led) {
+	stopBlink(led);
+}

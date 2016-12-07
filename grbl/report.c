@@ -457,14 +457,16 @@ void report_realtime_status()
   if (bit_istrue(settings.status_report_mask,(BITFLAG_RT_STATUS_MACHINE_POSITION | BITFLAG_RT_STATUS_WORK_POSITION))) {
     system_convert_array_steps_to_mpos(print_position,current_position);
   }
-  
+
   // Report machine position
   if (bit_istrue(settings.status_report_mask,BITFLAG_RT_STATUS_MACHINE_POSITION)) {
+	//lcdReport_Position(print_position);
     printPgmString(PSTR(",MPos:")); 
     for (idx=0; idx< N_AXIS; idx++) {
       printFloat_CoordValue(print_position[idx]);
       if (idx < (N_AXIS-1)) { printPgmString(PSTR(",")); }
     }
+	
   }
   
   // Report work position
@@ -492,10 +494,10 @@ void report_realtime_status()
   }
 
   // Report laser temperature
-  if (bit_istrue(settings.status_report_mask,BITFLAG_RT_STATUS_LASER_TEMP)) {
-	  printPgmString(PSTR(",TEMP:"));
-	  printFloat(laser_getTemp(),1);
-  }
+  //if (bit_istrue(settings.status_report_mask,BITFLAG_RT_STATUS_LASER_TEMP)) {
+	 // printPgmString(PSTR(",TEMP:"));
+	 // printFloat(thermistor_getTemp(Laser_Temp_PIN),1);
+  //}
 
   // Report laser power
   //if (bit_istrue(settings.status_report_mask,BITFLAG_RT_STATUS_LASER_TEMP)) {
@@ -531,4 +533,5 @@ void report_realtime_status()
   #endif
   
   printPgmString(PSTR(">\r\n"));
+
 }

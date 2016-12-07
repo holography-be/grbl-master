@@ -41,6 +41,7 @@ void clock_stop()
 
 uint32_t getTick()
 {
+	// retour en milliseconde pour faciliter calcul
 	return __ticks * 100;
 }
 

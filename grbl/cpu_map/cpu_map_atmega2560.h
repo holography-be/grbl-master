@@ -32,6 +32,13 @@
 #define SERIAL_RX USART0_RX_vect
 #define SERIAL_UDRE USART0_UDRE_vect
 
+// I2C pins
+#define I2C_PORT	PORTD
+#define I2C_DDR		DDRD
+#define I2C_PIN		PIND
+#define SDA_PIN	1
+#define SCL_PIN	0
+
 // Increase Buffers to make use of extra SRAM
 //#define RX_BUFFER_SIZE		256
 //#define TX_BUFFER_SIZE		128
@@ -153,14 +160,14 @@
 #define LED_DDR			DDRL // D42 -> D49
 #define LED_PIN			PINL
 #define LED_PORT			PORTL
-#define LED1_BIT			0	// D49
-#define LED2_BIT			1	// D48
-#define LED3_BIT			2	// D47
-#define LED4_BIT			3	// D46
-#define LED5_BIT			4	// D45
-#define LED6_BIT			5	// D44
-#define LED7_BIT			6   // D43
-#define LED8_BIT			7	// D42
+#define LED1			0	// D49
+#define LED2			1	// D48
+#define LED3			2	// D47
+#define LED4			3	// D46
+#define LED5			4	// D45
+#define LED6			5	// D44
+#define LED7			6   // D43
+#define LED8			7	// D42
 #define LED_MASK			(B11111111) // Bit set = OUTPUT
 
 #define LED_ALARM				LED1_BIT

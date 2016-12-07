@@ -24,8 +24,15 @@
 
 void printString(const char *s)
 {
-  while (*s)
-    serial_write(*s++);
+	while (*s) {
+		if (printToLCD == true) {
+			//lcd_write(*s++);
+		}
+		else {
+			serial_write(*s++);
+		}
+	}
+
 }
 
 
@@ -33,8 +40,14 @@ void printString(const char *s)
 void printPgmString(const char *s)
 {
   char c;
-  while ((c = pgm_read_byte_near(s++)))
-    serial_write(c);
+  while ((c = pgm_read_byte_near(s++))) {
+	  if (printToLCD == true) {
+		//lcd_write(c);
+	  }
+	  else {
+		serial_write(c);
+	  }
+  }
 }
 
 
@@ -71,8 +84,15 @@ void print_unsigned_int8(uint8_t n, uint8_t base, uint8_t digits)
       n /= base;
   }
 
-  for (; i > 0; i--)
-      serial_write('0' + buf[i - 1]);
+  for (; i > 0; i--) {
+	  if (printToLCD == true) {
+		  //lcd_write('0' + buf[i - 1]);
+	  }
+	  else {
+		serial_write('0' + buf[i - 1]);
+	  }
+  }
+
 }
 
 
@@ -96,7 +116,13 @@ void print_uint8_base10(uint8_t n)
 void print_uint32_base10(uint32_t n)
 { 
   if (n == 0) {
-    serial_write('0');
+	  if (printToLCD == true) {
+		  //lcd_write('0');
+	  }
+	  else {
+		serial_write('0');
+	  }
+
     return;
   } 
 
@@ -108,15 +134,27 @@ void print_uint32_base10(uint32_t n)
     n /= 10;
   }
     
-  for (; i > 0; i--)
-    serial_write('0' + buf[i-1]);
+  for (; i > 0; i--) {
+	  if (printToLCD == true) {
+		  //lcd_write('0' + buf[i - 1]);
+	  }
+	  else {
+		serial_write('0' + buf[i-1]);
+	  }
+  }
+
 }
 
 
 void printInteger(long n)
 {
   if (n < 0) {
-    serial_write('-');
+	  if (printToLCD == true) {
+		  //lcd_write('-');
+	  }
+	  else {
+		serial_write('-');
+	  }    
     print_uint32_base10(-n);
   } else {
     print_uint32_base10(n);
@@ -132,7 +170,13 @@ void printInteger(long n)
 void printFloat(float n, uint8_t decimal_places)
 {
   if (n < 0) {
-    serial_write('-');
+	  if (printToLCD == true) {
+		//lcd_write('-');
+	  }
+	  else {
+		serial_write('-');
+	  }
+
     n = -n;
   }
 
@@ -163,8 +207,15 @@ void printFloat(float n, uint8_t decimal_places)
   }   
   
   // Print the generated string.
-  for (; i > 0; i--)
-    serial_write(buf[i-1]);
+  for (; i > 0; i--) {
+	  if (printToLCD == true) {
+		//lcd_write(buf[i - 1]);
+	  }
+	  else {
+		serial_write(buf[i-1]);
+	  }
+  }
+
 }
 
 

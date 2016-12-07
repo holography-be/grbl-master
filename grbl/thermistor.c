@@ -18,8 +18,11 @@ int thermistor_read(uint8_t port) {
 	return value;
 }
 
-float laser_getTemp() {
-	uint8_t temp = thermistor_read(Laser_Temp_PIN);
+#define Laser_Temp_PIN		ADC0D   // ANALOG 0
+
+
+float thermistor_getTemp(uint8_t analogPort) {
+	uint8_t temp = thermistor_read(analogPort);
 	// resistance at 25 degrees C
 #define THERMISTORNOMINAL 10000  // 10K     
 	// temp. for nominal resistance (almost always 25 C)

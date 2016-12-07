@@ -25,52 +25,57 @@
 #define GRBL_VERSION "0.9j"
 #define GRBL_VERSION_BUILD "20160726"
 
-// Define standard libraries used by Grbl.
-#include <avr/io.h>
-#include <avr/pgmspace.h>
-#include <avr/interrupt.h>
-#include <avr/wdt.h>
-#include <util/delay.h>
-#include <math.h>
-#include <inttypes.h>    
-#include <string.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <binary.h>
-
-// Define the Grbl system include files. NOTE: Do not alter organization.
-
-uint8_t laserPowerSettings;	// % of power (need to change OCR4A for spindle control)	: JDU - 20161113
-uint8_t laserState;
-
-#include "config.h"
-#include "nuts_bolts.h"
-#include "settings.h"
-#include "system.h"
-#include "defaults.h"
-#include "cpu_map.h"
-#include "coolant_control.h"
-#include "eeprom.h"
-#include "gcode.h"
-#include "limits.h"
-#include "motion_control.h"
-#include "planner.h"
-#include "print.h"
-#include "probe.h"
-#include "protocol.h"
-#include "report.h"
-#include "serial.h"
-#include "spindle_control.h"
-#include "stepper.h"
-#include "laser.h"
-#include "thermistor.h"
-#include "relais.h"
-#include "clock.h"
-#include "leds.h"
+	#include <avr/io.h>
+	#include <avr/pgmspace.h>
+	#include <avr/interrupt.h>
+	#include <avr/wdt.h>
+	#include <util/delay.h>
+	#include <math.h>
+	#include <inttypes.h>    
+	#include <string.h>
+	#include <stdlib.h>
+	#include <stdint.h>
+	#include <stdbool.h>
+	#include <binary.h>
+	#include <compat/twi.h>
 
 
+	// Define standard libraries used by Grbl.
 
 
+	// Define the Grbl system include files. NOTE: Do not alter organization.
+
+	uint8_t laserPowerSettings;	// % of power (need to change OCR4A for spindle control)	: JDU - 20161113
+	uint8_t laserState;
+	uint8_t printToLCD;
+
+	//#include "twi.h"
+	//#include "wire.h"
+	#include "config.h"
+	#include "nuts_bolts.h"
+	#include "settings.h"
+	#include "system.h"
+	#include "defaults.h"
+	#include "cpu_map.h"
+	#include "coolant_control.h"
+	#include "eeprom.h"
+	#include "gcode.h"
+	#include "limits.h"
+	#include "motion_control.h"
+	#include "planner.h"
+	#include "print.h"
+	#include "probe.h"
+	#include "protocol.h"
+	#include "report.h"
+	#include "serial.h"
+	#include "spindle_control.h"
+	#include "stepper.h"
+	//#include "laser.h"
+	#include "thermistor.h"
+	#include "relais.h"
+	#include "clock.h"
+	#include "leds.h"
+	//#include "lcd.h"
+	//#include "lcdReport.h"
 
 #endif
